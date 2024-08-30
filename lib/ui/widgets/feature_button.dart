@@ -1,4 +1,5 @@
 
+import 'package:bdo_online_clone/core/common/app_color.dart';
 import 'package:flutter/material.dart';
 
 class FeatureButton extends StatelessWidget {
@@ -15,21 +16,27 @@ class FeatureButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Icon(icon, color: Colors.blue, size: 40),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.blue,
-              fontSize: 12,
-            ),
+    return Card(
+      elevation: 0,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: Column(
+            children: [
+              Icon(icon, color: AppColor.primaryColor, size: 32),
+              const SizedBox(height: 8),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.blue,
+                  fontSize: 14,
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

@@ -1,4 +1,9 @@
 import 'package:bdo_online_clone/core/common/app_color.dart';
+import 'package:bdo_online_clone/core/utils/navigator_context.dart';
+import 'package:bdo_online_clone/ui/screens/more/manage_cards_screen.dart';
+import 'package:bdo_online_clone/ui/screens/more/manage_account_screen.dart';
+import 'package:bdo_online_clone/ui/screens/more/manage_login_screen.dart';
+import 'package:bdo_online_clone/ui/screens/more/update_profile_screen.dart';
 import 'package:bdo_online_clone/ui/widgets/selection_card.dart';
 import 'package:flutter/material.dart';
 
@@ -27,28 +32,36 @@ class _MoreContentState extends State<MoreContent> {
             icon: Icons.store_mall_directory_outlined,
             text: 'Manage Account',
             description: 'Add and secure your accounts',
-            onTap: () {},
+            onTap: () {
+              NavigatorContext.add(ManageAccountScreen.routeName);
+            },
           ),
           const SizedBox(height: 10),
           SelectionCard(
             icon: Icons.credit_card_outlined,
             text: 'Manage Cards',
             description: 'Edit your card security and settings',
-            onTap: () {},
+            onTap: () {
+              NavigatorContext.add(ManageCardsScreen.routeName);
+            },
           ),
           const SizedBox(height: 10),
           SelectionCard(
             icon: Icons.login,
             text: 'Manage Login',
             description: 'Manage your login options',
-            onTap: () {},
+            onTap: () {
+              NavigatorContext.add(ManageLoginScreen.routeName);
+            },
           ),
           const SizedBox(height: 10),
           SelectionCard(
             icon: Icons.person_add_alt,
             text: 'Update Profile',
             description: 'Update your personal information',
-            onTap: () {},
+            onTap: () {
+              NavigatorContext.add(UpdateProfileScreen.routeName);
+            },
           ),
           const SizedBox(height: 10),
           SelectionCard(

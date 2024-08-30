@@ -1,11 +1,17 @@
 import 'package:bdo_online_clone/core/common/app_color.dart';
 import 'package:bdo_online_clone/core/enums/navbar_enum.dart';
 import 'package:bdo_online_clone/core/providers/navbar_provider.dart';
+import 'package:bdo_online_clone/core/utils/navigator_context.dart';
+import 'package:bdo_online_clone/data/mock_data.dart';
+import 'package:bdo_online_clone/ui/screens/contents/account_details_content.dart';
+import 'package:bdo_online_clone/ui/screens/contents/account_transactions_content.dart';
 import 'package:bdo_online_clone/ui/screens/contents/accounts_content.dart';
 import 'package:bdo_online_clone/ui/screens/contents/more_content.dart';
 import 'package:bdo_online_clone/ui/screens/contents/pay_content.dart';
 import 'package:bdo_online_clone/ui/screens/contents/qr_content.dart';
 import 'package:bdo_online_clone/ui/screens/contents/sendmoney_content.dart';
+import 'package:bdo_online_clone/ui/screens/contents/tansaction_detail_content.dart';
+import 'package:bdo_online_clone/ui/screens/notifications/notifications_screen.dart';
 import 'package:bdo_online_clone/ui/widgets/circular_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,11 +25,21 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool hasBackButton = false;
   bool isLoading = false;
   @override
   void initState() {
     initLoading();
     super.initState();
+  }
+
+  void setBackButton(value) {
+    if (!mounted) return;
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      setState(() {
+        hasBackButton = value;
+      });
+    });
   }
 
   void setLoading(value) {
@@ -39,24 +55,41 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Widget content(selectedIndex) {
+  Widget content(selectedIndex, subContentIndex) {
     if (selectedIndex == NavBarEnum.ACCOUNTS) {
-      return AccountsContent();
+      if (subContentIndex == ContentEnum.ACCOUNT_TRANSACTIONS) {
+        return const AccountTransactionsContent();
+      } else if (subContentIndex == ContentEnum.ACCOUNT_DETAILS) {
+        return const AccountDetailsContent();
+      } else if (subContentIndex == ContentEnum.TRANSACTION_DETAILS) {
+        return const TransactionDetailsContent();
+      }
+      return const AccountsContent();
     } else if (selectedIndex == NavBarEnum.SEND_MONEY) {
-      return SendMoneyContent();
+      return const SendMoneyContent();
     } else if (selectedIndex == NavBarEnum.PAY) {
-      return PayContent();
+      return const PayContent();
     } else if (selectedIndex == NavBarEnum.QR) {
-      return QrContent();
+      return const QrContent();
     } else if (selectedIndex == NavBarEnum.MORE) {
-      return MoreContent();
+      return const MoreContent();
     } else {
       return Container();
     }
   }
 
-  String appTitle(selectedIndex) {
+  String appTitle(selectedIndex, subContentIndex) {
+    setBackButton(false);
     if (selectedIndex == NavBarEnum.ACCOUNTS) {
+      setBackButton(true);
+      if (subContentIndex == ContentEnum.ACCOUNT_TRANSACTIONS) {
+        return MockData.accountNickName;
+      } else if (subContentIndex == ContentEnum.ACCOUNT_DETAILS) {
+        return 'Account Details';
+      } else if (subContentIndex == ContentEnum.TRANSACTION_DETAILS) {
+        return 'Transaction';
+      }
+      setBackButton(false);
       return 'Accounts';
     } else if (selectedIndex == NavBarEnum.SEND_MONEY) {
       return 'Send Money';
@@ -75,17 +108,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Consumer<NavBarProvider>(builder: (context, provider, child) {
       return Scaffold(
+        backgroundColor: AppColor.backgroundColor,
         appBar: AppBar(
+          automaticallyImplyLeading: hasBackButton,
           backgroundColor: AppColor.primaryColor,
           elevation: 0,
-          title: Text(appTitle(provider.selectedItem)),
+          title: Text(
+            appTitle(provider.selectedItem, provider.selectedContent),
+          ),
           actions: [
             Stack(
               children: [
                 IconButton(
                   icon: const Icon(Icons.notifications, color: Colors.white),
                   onPressed: () {
-                    // Handle notifications action
+                    NavigatorContext.add(NotificationsScreen.routeName);
                   },
                 ),
                 Positioned(
@@ -107,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: isLoading
             ? const CircularProgress()
             : SingleChildScrollView(
-                child: content(provider.selectedItem),
+                child: content(provider.selectedItem, provider.selectedContent),
               ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
