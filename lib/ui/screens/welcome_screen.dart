@@ -1,4 +1,5 @@
 import 'package:bdo_online_clone/core/common/app_color.dart';
+import 'package:bdo_online_clone/core/utils/dialogs.dart';
 import 'package:bdo_online_clone/core/utils/navigator_context.dart';
 import 'package:bdo_online_clone/ui/screens/passcode_screen.dart';
 import 'package:bdo_online_clone/ui/widgets/feature_button.dart';
@@ -16,6 +17,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height * 0.40;
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: AppColor.primaryColor,
         elevation: 0,
@@ -43,12 +45,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      NavigatorContext.go(PasscodeScreen.routeName);
+                      NavigatorContext.add(PasscodeScreen.routeName);
                     },
                     style: ElevatedButton.styleFrom(
                       primary: AppColor.primaryColor,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // Rounded corners
+                        borderRadius: BorderRadius.circular(8), // Rounded corners
                       ),
                     ),
                     child: const Text(
@@ -68,33 +70,41 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                FeatureButton(
-                  icon: Icons.home_outlined, // Use appropriate icons
-                  label: 'Open an Account',
-                  onTap: () {
-                    // Handle tap
-                  },
+                Expanded(
+                  child: FeatureButton(
+                    icon: Icons.account_balance_outlined, // Use appropriate icons
+                    label: 'Open an Account',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
                 ),
-                FeatureButton(
-                  icon: Icons.credit_card,
-                  label: 'Get a Credit Card',
-                  onTap: () {
-                    // Handle tap
-                  },
+                Expanded(
+                  child: FeatureButton(
+                    icon: Icons.credit_card_outlined,
+                    label: 'Get a Credit Card',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
                 ),
-                FeatureButton(
-                  icon: Icons.check_circle_outline,
-                  label: 'Activate Credit Card',
-                  onTap: () {
-                    // Handle tap
-                  },
+                Expanded(
+                  child: FeatureButton(
+                    icon: Icons.credit_score_outlined,
+                    label: 'Activate Credit Card',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
                 ),
-                FeatureButton(
-                  icon: Icons.spa_outlined,
-                  label: 'Manage Investments',
-                  onTap: () {
-                    // Handle tap
-                  },
+                Expanded(
+                  child: FeatureButton(
+                    icon: Icons.spa_outlined,
+                    label: 'Manage Investments',
+                    onTap: () {
+                      // Handle tap
+                    },
+                  ),
                 ),
               ],
             ),

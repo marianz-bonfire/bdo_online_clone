@@ -3,18 +3,26 @@ import 'package:flutter/material.dart';
 
 class SelectionCard extends StatelessWidget {
   final IconData? icon;
+  final IconData? iconRight;
   final String text;
   final String description;
   final VoidCallback onTap;
-  const SelectionCard({super.key, this.icon, required this.text, required this.description, required this.onTap});
+  const SelectionCard({
+    super.key,
+    this.icon,
+    this.iconRight,
+    required this.text,
+    required this.description,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        elevation: 3,
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 0,
+      child: InkWell(
+        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -22,8 +30,10 @@ class SelectionCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(icon, size: 28, color: AppColor.primaryColor),
-                  const SizedBox(width: 16),
+                  if (icon != null) ...[
+                    Icon(icon, size: 28, color: AppColor.primaryColor),
+                    const SizedBox(width: 16),
+                  ],
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,6 +42,7 @@ class SelectionCard extends StatelessWidget {
                           text,
                           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                         ),
+                        const SizedBox(height: 8),
                         Text(
                           description,
                           style: const TextStyle(fontSize: 12, color: Colors.grey),
@@ -39,6 +50,12 @@ class SelectionCard extends StatelessWidget {
                       ],
                     ),
                   ),
+                  if (iconRight != null) ...[
+                    const SizedBox(width: 16),
+                    Icon(iconRight, size: 28, color: AppColor.primaryColor),
+                  ] else ...[
+                    Container(),
+                  ]
                 ],
               ),
             ],

@@ -1,5 +1,9 @@
 import 'package:bdo_online_clone/core/common/app_color.dart';
+import 'package:bdo_online_clone/core/enums/navbar_enum.dart';
+import 'package:bdo_online_clone/core/providers/navbar_provider.dart';
+import 'package:bdo_online_clone/data/mock_data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AccountsContent extends StatefulWidget {
   static const String routeName = 'HomeScreen';
@@ -12,6 +16,7 @@ class AccountsContent extends StatefulWidget {
 class _AccountsContentState extends State<AccountsContent> {
   @override
   Widget build(BuildContext context) {
+    var provider = context.watch<NavBarProvider>();
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -24,11 +29,13 @@ class _AccountsContentState extends State<AccountsContent> {
           const SizedBox(height: 10),
           buildAccountCard(
             icon: Icons.account_balance_outlined,
-            accountName: 'Marianz',
-            accountNumber: '****4714',
-            availableBalance: '3,056,624.10',
-            currentBalance: '3,056,624.10',
-            onTap: () {},
+            accountName: MockData.accountNickName,
+            accountNumber: MockData.accountNumber,
+            availableBalance: MockData.accountBalance,
+            currentBalance: MockData.accountBalance,
+            onTap: () {
+              provider.setSelectedContent(ContentEnum.ACCOUNT_TRANSACTIONS);
+            },
           ),
           const SizedBox(height: 20),
           const Text(
@@ -50,11 +57,11 @@ class _AccountsContentState extends State<AccountsContent> {
     required String currentBalance,
     required VoidCallback onTap,
   }) {
-    return InkWell(
-      onTap: onTap,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        elevation: 3,
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      elevation: 1,
+      child: InkWell(
+        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
@@ -115,47 +122,50 @@ class _AccountsContentState extends State<AccountsContent> {
   Widget buildCreditCard() {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 3,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.credit_card_outlined, size: 32, color: AppColor.primaryColor),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'VISA CLASSIC',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        '****0703',
-                        style: TextStyle(fontSize: 14, color: Colors.grey),
-                      ),
-                    ],
+      elevation: 1,
+      child: InkWell(
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.credit_card_outlined, size: 32, color: AppColor.primaryColor),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          MockData.creditCardName,
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          MockData.creditCardNumber,
+                          style: const TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  // Handle activate card action
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: AppColor.primaryColor, // Background color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                // Handle activate card action
-              },
-              style: ElevatedButton.styleFrom(
-                primary: AppColor.primaryColor, // Background color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                child: const Center(child: Text('Activate Card')),
               ),
-              child: const Center(child: Text('Activate Card')),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

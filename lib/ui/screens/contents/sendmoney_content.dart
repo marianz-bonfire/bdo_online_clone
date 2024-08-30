@@ -1,4 +1,6 @@
 import 'package:bdo_online_clone/core/common/app_color.dart';
+import 'package:bdo_online_clone/core/utils/navigator_context.dart';
+import 'package:bdo_online_clone/ui/screens/sendmoney/other_bank_wallets_screen.dart';
 import 'package:bdo_online_clone/ui/widgets/selection_card.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +39,9 @@ class _SendMoneyContentState extends State<SendMoneyContent> {
             icon: Icons.wallet,
             text: 'Other Banks and Wallets',
             description: 'Send Money to another bank or wallet',
-            onTap: () {},
+            onTap: () {
+              NavigatorContext.add(OtherBanksAndWalletsScreen.routeName);
+            },
           ),
           const SizedBox(height: 10),
           SelectionCard(

@@ -1,3 +1,4 @@
+import 'package:bdo_online_clone/core/providers/banks_provider.dart';
 import 'package:bdo_online_clone/ui/screens/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => NavBarProvider()),
+        ChangeNotifierProvider(create: (context) => BanksProvider()),
       ],
       child: MaterialApp(
         navigatorKey: NavigatorContext.key,

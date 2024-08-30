@@ -3,14 +3,22 @@ import 'package:flutter/material.dart';
 
 class NavBarProvider with ChangeNotifier {
   int selectedItem = NavBarEnum.ACCOUNTS;
-  NavBarProvider() {
-    _init();
+  int selectedContent = ContentEnum.NONE;
+
+  Future<void> init() async {
+    selectedItem = NavBarEnum.ACCOUNTS;
+    selectedContent = ContentEnum.NONE;
+    notifyListeners();
   }
 
-  Future<void> _init() async {}
-
   Future<void> setSelectedMenu(int selectedIndex) async {
+    setSelectedContent(ContentEnum.NONE);
     selectedItem = selectedIndex;
+    notifyListeners();
+  }
+
+  Future<void> setSelectedContent(int selectedContentIndex) async {
+    selectedContent = selectedContentIndex;
     notifyListeners();
   }
 }

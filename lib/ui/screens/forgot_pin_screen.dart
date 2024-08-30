@@ -1,4 +1,3 @@
-import 'package:bdo_online_clone/core/providers/navbar_provider.dart';
 import 'package:bdo_online_clone/core/utils/dialogs.dart';
 import 'package:bdo_online_clone/core/utils/navigator_context.dart';
 import 'package:bdo_online_clone/ui/screens/home_screen.dart';
@@ -6,17 +5,16 @@ import 'package:bdo_online_clone/ui/widgets/circular_progress.dart';
 import 'package:bdo_online_clone/ui/widgets/logo_widget.dart';
 import 'package:bdo_online_clone/ui/widgets/number_button.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class PasscodeScreen extends StatefulWidget {
-  static const String routeName = 'PasscodeScreen';
-  const PasscodeScreen({super.key});
+class ForgotPinScreen extends StatefulWidget {
+  static const String routeName = 'ForgotPinScreen';
+  const ForgotPinScreen({super.key});
 
   @override
-  _PasscodeScreenState createState() => _PasscodeScreenState();
+  _ForgotPinScreenState createState() => _ForgotPinScreenState();
 }
 
-class _PasscodeScreenState extends State<PasscodeScreen> {
+class _ForgotPinScreenState extends State<ForgotPinScreen> {
   final int pinLength = 6;
   String pin = "";
   bool isLoading = false;
@@ -49,7 +47,6 @@ class _PasscodeScreenState extends State<PasscodeScreen> {
   void goNext() {
     setLoading(true);
     Future.delayed(const Duration(milliseconds: 500), () {
-      context.read<NavBarProvider>().init();
       NavigatorContext.go(HomeScreen.routeName);
       setLoading(false);
     });
