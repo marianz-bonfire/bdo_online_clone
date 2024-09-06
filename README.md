@@ -1,7 +1,13 @@
 # bdo_online_clone
 BDO Online app clone, that lets you track your transactions, settle your payments, and manage your BDO Credit Card accounts on your phone.
 
-
+*NOTES* ⚠️ 
+```
+It is created solely for educational purposes and coding challenges.
+This project is not intended for any illegal use or distribution.
+All rights to the original app belong to their respective owners.
+Feel free to customize it to better fit your needs.
+```
 
 ## Screenshots
 
