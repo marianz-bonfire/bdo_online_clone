@@ -11,13 +11,11 @@ Feel free to customize it to better fit your needs.
 
 ## Screenshots
 
-|        Login Screen         |     |          Accounts Screen           |   Send Money Screen         |
-| :------------------------: | :-- | :--------------------------------: | :--------------------------: |
-| ![Login Screen][login-image] |     | ![Accounts Screen][accounts-image] | ![SEnd Screen][send-image] |
-
-|          Pay Screen           |     |          QR  Screen            |           More Screen            |
-| :--------------------------------: | :-- | :-----------------------------: | :------------------------------------: |
-| ![Pay Screen][pay-image] |     | ![QR Screen][qr-image] | ![More Screen][more-image] |
+|        Login Screen         |          Accounts Screen           |   Send Money Screen         |
+| :------------------------: | :--------------------------------: | :--------------------------: |
+| ![Login Screen][login-image] | ![Accounts Screen][accounts-image] | ![SEnd Screen][send-image] |
+|          Pay Screen           |          QR  Screen            |           More Screen            |
+| ![Pay Screen][pay-image] | ![QR Screen][qr-image] | ![More Screen][more-image] |
 
 <!-- Variables -->
 
